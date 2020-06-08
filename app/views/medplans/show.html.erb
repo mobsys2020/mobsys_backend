@@ -1,0 +1,68 @@
+<% provide(:title, "Medikamentenplan") %>
+<br><br>
+<h1>Medikamentenplan</h1>
+
+<h2> Sie müssen insgesamt <%=@meds.count%> Medikamente nehmen</h2>
+<h3>Ihr Plan wurde Erstellt von <a href="/users/<%=@doctor.id%>"><%=@doctor.name%></a></h3>
+<br>
+<br>
+<table>
+<thead>
+  <tr>
+    <th>Name
+    </th>
+    <th>Menge
+    </th>
+    <th>Zeit
+    </th>
+    <th> Einahmezeit
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+
+<% @meds.each do |med| %>
+   <tr>
+    <td><%=med.name%>
+    </td>
+    <td><%=med.quantity%>
+    </td>
+    <td><%=med.time%>
+    </td>
+    <td><%=med.days%>
+    </td>
+    <%if current_user.doctor%>
+    <td><a href="/med/del/<%=med.id%>"><button>delete</button></a>
+    </td>
+    <%end%>
+   </tr>
+
+
+<%end%>
+</tbody>
+
+</table>
+<%if current_user.doctor%>
+<h3> neues medikament hinzufügen</h3>
+<div class="col-md-6 col-md-offset-3">
+    <form class="new_med" id="new_med" action="/med/new" accept-charset="UTF-8" method="post" autocomplete="off" enctype='multipart/form-data'> 
+    <label>Medikamentenname<br>
+    <input name="name">
+    </label>
+    <label>Menge<br>
+    <input  name="quantity">
+    </label>
+    <label>Einnahmezeit<br>
+    <input  name="time">
+    </label>
+    <label>Einnahmeperiode<br>
+    <input  name="days">
+    </label>
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+    <input type="hidden" name="medplan_id" value="<%= @plan.id %>" />
+    <input type="hidden" name="user_id" value="<%= params[:id] %>" />
+    <br><br>
+
+  <button type="submit" class="btn btn-primary">Absenden</button>
+  </div>
+  <%end%>

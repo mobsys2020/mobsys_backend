@@ -1,0 +1,9 @@
+<% provide(:title, "Medikamentenpläne") %>
+<br>
+<br>
+<a href = "/medplan/new"><button class="btn btn-outline-success my-2 my-sm-0">neuen Medikamentenplan erstellen</button></a>
+<br>
+<br>
+<% @plans.each do |plan| %>
+    <ul><a href = "/medplan/<%=plan.user_id.to_s%>">Nutzer: <%=User.find_by(id: plan.user_id).name%> id: <%=plan.user_id%></a> ---- <a href = "/medplan/del/<%=plan.id%>"><button>Löschen</button></a></ul>
+<%end%>

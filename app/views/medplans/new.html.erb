@@ -1,0 +1,16 @@
+<% provide(:title, 'Neuer Medikationsplan') %>
+<br>
+<br>
+<h1>Medikamentenplan erstellen</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <form class="new_medplan" id="new_medplan" action="/medplan/new" accept-charset="UTF-8" method="post" autocomplete="off" enctype='multipart/form-data'> 
+    <label>User_id<br>
+    <input type="number" name="medplan[user_id]">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+    </label><br><br>
+
+  <button type="submit" class="btn btn-primary">Absenden</button>
+  </div>
+</div>

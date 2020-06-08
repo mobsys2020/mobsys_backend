@@ -1,0 +1,2 @@
+module MedplansHelper
+end

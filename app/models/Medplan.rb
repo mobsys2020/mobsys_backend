@@ -1,0 +1,2 @@
+class Medplan < ApplicationRecord
+end
