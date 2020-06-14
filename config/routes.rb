@@ -16,5 +16,6 @@ Rails.application.routes.draw do
   match "/medplan/del/:id" => "medplans#delete", via: :get
   match "/medplan/:id" => "medplans#show", via: :get
   match "/med/del/:id" => "meds#del", via: :get
+  match "/request/:id" => "medplans#get", via: :get
 
 end

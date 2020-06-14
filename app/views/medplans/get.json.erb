@@ -1,0 +1,16 @@
+{
+    "Medikamentenplan": {
+        "Patient": "<%=@user.name%>",
+        "ausgestellt von": "<%=@doctor.name%>",
+        "anzahl einzunehmender Medikamente": "<%=@meds.count%>",
+		"Medikamente": {
+            <% @meds.each do |med| %>
+            "<%=med.name%>": {
+                "Anzahl": "<%=med.quantity%>",
+                "Einnahmezeit": "<%=med.time%>",
+                "Einnahmetage": "<%=med.days%>"
+                }
+            <%end%>
+                }
+            }
+        }

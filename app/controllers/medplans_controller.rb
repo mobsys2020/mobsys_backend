@@ -40,9 +40,21 @@ class MedplansController < ApplicationController
         redirect_to "/medplan/"
     end
 
+    def get
+        @plan = Medplan.find_by(user_id: params[:id])
+        @doctor = User.find_by(id: @plan.doctor_id)
+        @meds = Med.all.where("medplan_id = ?", @plan.id)
+        @user = User.find_by(id: params[:id])
+        respond_to do |format|
+            format.json { render :layout => false }
+        end
+    end
+
     private
 
     def medplan_params
         params.require(:medplan).permit(:user_id)
     end
+
+    
 end
