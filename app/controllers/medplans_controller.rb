@@ -11,9 +11,24 @@ class MedplansController < ApplicationController
 
     def show
         @plan = Medplan.find_by(user_id: params[:id])
+        
+
         if !@plan.nil?
             @meds = Med.all.where("medplan_id = ?", @plan.id)
             @doctor = User.find_by(id: @plan.doctor_id)
+            @json_string = '{"patient": "'+User.find_by(id: params[:id]).name+'", "doctor": "'+@doctor.name+'","medcount": "'+@meds.count.to_s+'", "meds": ['
+            i = 1
+            @meds.each do |med|
+                @json_string += '{ "name":"'+med.name+'",'
+                @json_string += '"quantity":"'+ med.quantity+'",'
+                @json_string += '"time": "'+med.time+'",'
+                @json_string += '"days": "'+med.days+'"}'
+                if i<@meds.count
+                    @json_string += ','
+                end
+                i += 1
+            end
+            @json_string += ']}'
         else
             redirect_to "/"
         end

@@ -1,7 +1,7 @@
 <% provide(:title, "Medikamentenplan") %>
 <br><br>
 <h1>Medikamentenplan</h1>
-
+<img src="https://chart.googleapis.com/chart?cht=qr&chs=500x500&chl=<%=@json_string%>">
 <h2> Sie müssen insgesamt <%=@meds.count%> Medikamente nehmen</h2>
 <h3>Ihr Plan wurde Erstellt von <a href="/users/<%=@doctor.id%>"><%=@doctor.name%></a></h3>
 <br>
@@ -51,12 +51,30 @@
     </label>
     <label>Menge<br>
     <input  name="quantity">
+    <select name="_quantity" id="time">
+      <option value="mg">mg</option>
+      <option value="Stueck">Stueck</option>
+      <option value="mL">mL</option>
+    </select> 
     </label>
     <label>Einnahmezeit<br>
-    <input  name="time">
+    <select name="time" id="time">
+      <option value="Morgens">Morgens</option>
+      <option value="Mittags">Mittags</option>
+      <option value="Abends">Abends</option>
+      <option value="Zur Nacht">Zur Nacht</option>
+    </select> 
     </label>
-    <label>Einnahmeperiode<br>
-    <input  name="days">
+    <label>EinnahmeTag<br>
+    <select name="days" id="time">
+      <option value="Montag">Montag</option>
+      <option value="Dienstag">Dienstag</option>
+      <option value="Mittwoch">Mittwoch</option>
+      <option value="Donnerstag">Donnerstag</option>
+      <option value="Freitag">Freitag</option>
+      <option value="Samstag">Samstag</option>
+      <option value="Sonntag">Sonntag</option>
+    </select> 
     </label>
     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
     <input type="hidden" name="medplan_id" value="<%= @plan.id %>" />
