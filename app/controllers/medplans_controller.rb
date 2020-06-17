@@ -1,4 +1,5 @@
 class MedplansController < ApplicationController
+    skip_before_action :verify_authenticity_token, :only => [:request_plan]
 
     def decide
         if current_user.doctor
@@ -45,6 +46,15 @@ class MedplansController < ApplicationController
         @doctor = User.find_by(id: @plan.doctor_id)
         @meds = Med.all.where("medplan_id = ?", @plan.id)
         @user = User.find_by(id: params[:id])
+        respond_to do |format|
+            format.json { render :layout => false }
+        end
+    end
+    def request_plan
+        @user = User.find_by(user_access_token: params[:uat])
+        @plan = Medplan.find_by(user_id: @user.id)
+        @doctor = User.find_by(id: @plan.doctor_id)
+        @meds = Med.all.where("medplan_id = ?", @plan.id)
         respond_to do |format|
             format.json { render :layout => false }
         end

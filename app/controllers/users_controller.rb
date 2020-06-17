@@ -21,6 +21,21 @@ class UsersController < ApplicationController
     end
   end
 
+  def edituat
+    @user = current_user
+  end
+
+  def updateuat
+    @user = current_user
+    @user.user_access_token = params[:uat]
+    if @user.save!
+      redirect_to "/"
+    else
+      render :edituat
+    end
+  end
+
+
   private
 
   def user_params

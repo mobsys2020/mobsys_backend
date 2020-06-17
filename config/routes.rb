@@ -12,10 +12,13 @@ Rails.application.routes.draw do
   get '/medplan/new'  => 'medplans#new'
   post '/medplan/new'  => 'medplans#create'
   get '/medplan/all' => 'medplans#all'
+  get '/edit/useraccesstoken' => 'users#edituat'
+  post '/edit/useraccesstoken' => 'users#updateuat'
   post "/med/new" => 'meds#new'
   match "/medplan/del/:id" => "medplans#delete", via: :get
   match "/medplan/:id" => "medplans#show", via: :get
   match "/med/del/:id" => "meds#del", via: :get
   match "/request/:id" => "medplans#get", via: :get
+  post "/request" => 'medplans#request_plan'
 
 end

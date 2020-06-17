@@ -10,15 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_08_104316) do
+ActiveRecord::Schema.define(version: 2020_06_17_104316) do
 
-  create_table "users", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
+  create_table "medplans", force: :cascade do |t|
+    t.integer "doctor_id"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "password_digest"
-    t.boolean "doctor", default: false
   end
 
   create_table "meds", force: :cascade do |t|
@@ -31,12 +29,14 @@ ActiveRecord::Schema.define(version: 2020_06_08_104316) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "medplans", force: :cascade do |t|
-    t.integer "doctor_id"
-    t.integer "user_id"
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "password_digest"
+    t.boolean "doctor", default: false
+    t.string "user_access_token", default: ""
   end
-
 
 end
